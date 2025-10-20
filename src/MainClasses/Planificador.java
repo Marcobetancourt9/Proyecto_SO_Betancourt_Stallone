@@ -13,6 +13,11 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author chela
+ */
+
 public class Planificador {
 
     private String nombreAlgoritmo;

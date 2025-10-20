@@ -6,7 +6,6 @@ package MainPackage;
 import GUI.Classes.ChartClass;
 import AuxClass.Cola;
 import GUI.Classes.Estadisticas;
-
 import GUI.Classes.Simulator;
 import GUI.Classes.ProcessMaker;
 import MainClasses.CPU;
@@ -22,6 +21,11 @@ import AuxClass.Conjunto;
 import java.awt.FontFormatException;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ *
+ * @author chela
+ */
 
 public class App {
 
