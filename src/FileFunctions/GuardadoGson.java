@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
- * @author Angelo
+ * @author chela
  */
 public class GuardadoGson {
 
