@@ -14,6 +14,8 @@ import MainClasses.Metrics;
 import MainClasses.Planificador;
 import MainClasses.Proceso;
 import MainClasses.ProcesoCPUBOUND;
+import MainClasses.MemoryManager;
+import MainClasses.Planificador;
 import MainClasses.ProcesoIOBOUND;
 import MainClasses.RegistrosControlEstado;
 import FileFunctions.GuardadoGson;
@@ -39,6 +41,9 @@ public class App {
     public AtomicInteger duracionCicloInstruccion = new AtomicInteger(); //Variable global que indica la duración de un ciclo de instrucción
     public boolean flagCambio = false;
     private GuardadoGson guardadoGson;
+    MemoryManager memoryManager = new MemoryManager(1024, 256);
+    Planificador p = new Planificador(memoryManager);
+
 
     public int relojGlobal;
     

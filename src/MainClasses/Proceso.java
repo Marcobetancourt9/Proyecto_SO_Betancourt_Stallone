@@ -20,6 +20,8 @@ public class Proceso extends Thread{
     private int tasaRespuesta;
     private int cicloEntradaListo; //último ciclo global en el que entró a la cola de listos
     private int sleepTime;
+    private int memoryNeeded;
+
 
     private AtomicInteger ciclosDuracion;
     
@@ -96,6 +98,14 @@ public void resetRemainingQuantum(int quantum) {
     public String getNombreProceso() {
         return nombre_proceso;
     }
+    public int getMemoryNeeded() {
+    return memoryNeeded;
+}
+
+public void setMemoryNeeded(int memoryNeeded) {
+    this.memoryNeeded = memoryNeeded;
+}
+
     
     /**
      *

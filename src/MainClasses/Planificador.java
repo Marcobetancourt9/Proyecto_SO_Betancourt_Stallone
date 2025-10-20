@@ -8,10 +8,12 @@ import AuxClass.Cola;
 import AuxClass.Nodo;
 import MainClasses.CPU;
 import MainClasses.Proceso;
+import MainClasses.MemoryManager;
 import MainPackage.App;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
@@ -25,6 +27,7 @@ public class Planificador {
     private Cola<Proceso> ColaListos;
     private Cola<Proceso> ColaBloqueados;
     private Cola<Proceso> ColaTerminados;
+    private Cola<Proceso> ColaSuspendidos = new Cola<>();
     private final App app = App.getInstance();
 
     //private CPU cpuDefault;
@@ -34,6 +37,21 @@ public class Planificador {
     private Semaphore semaphore; // Semáforo para garantizar exclusión mutua
     private Semaphore semaphore2; //Semáforo para exclusión mutua de la cola de bloqueados 
     private Semaphore semaphore3; //este es para la cola de terminados
+    private MemoryManager memoryManager;
+    
+public Planificador(MemoryManager memoryManager) {
+    this.memoryManager = memoryManager;
+    this.ColaListos = new Cola<>();
+    this.ColaBloqueados = new Cola<>();
+    this.ColaTerminados = new Cola<>();
+    this.ColaSuspendidos = new Cola<>();
+    this.semaphore = new Semaphore(1);
+    this.semaphore2 = new Semaphore(1);
+    this.semaphore3 = new Semaphore(1);
+    
+}
+
+
 
     public Planificador(String nombreAlgoritmo, Cola<Proceso> ColaListos, Cola<Proceso> ColaBloqueados, Cola<Proceso> ColaTerminados, CPU cpuDefault) {
         this.nombreAlgoritmo = nombreAlgoritmo;
@@ -89,6 +107,22 @@ public class Planificador {
         }
         return proceso;
     }
+    
+    public void agregarProcesoNuevo(Proceso proceso) {
+    if (memoryManager == null) {
+        // En caso de que no se haya inyectado un MemoryManager aún
+        getColaListos().encolar(proceso);
+        return;
+    }
+
+    if (!memoryManager.requestMemory(proceso)) {
+        ColaSuspendidos.encolar(proceso);
+        System.out.println("Proceso " + proceso.getNombreProceso() + " suspendido por falta de memoria.");
+    } else {
+        getColaListos().encolar(proceso);
+        System.out.println("Proceso " + proceso.getNombreProceso() + " agregado a la cola de listos.");
+    }
+}
 
 
     private Proceso hrrn(int relojGlobal) {
@@ -437,24 +471,38 @@ public class Planificador {
         return p;
     }
 
-    public void terminarProceso(Proceso procesoTerminado) {
-        try {
-
-            semaphore3.acquire(); //wait
-
-            procesoTerminado.getPCB_proceso().setEstado("Exit");
-            if (procesoTerminado.getNombreProceso() != "SO") {
-                this.ColaTerminados.encolar(procesoTerminado);// Encolar el proceso en Terminados
-                System.out.println("SOMOS TERMINADOS EN COLA" + this.ColaTerminados.getSize());
-
-            }
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Planificador.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            semaphore3.release(); // Liberar el permiso del semáforo (signal)
+public void terminarProceso(Proceso procesoTerminado) {
+    try {
+        semaphore3.acquire(); //wait
+        procesoTerminado.getPCB_proceso().setEstado("Exit");
+        if (!procesoTerminado.getNombreProceso().equals("SO")) {
+            this.ColaTerminados.encolar(procesoTerminado);
+            System.out.println("SOMOS TERMINADOS EN COLA " + this.ColaTerminados.getSize());
         }
+    } catch (InterruptedException ex) {
+        Logger.getLogger(Planificador.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        semaphore3.release();
     }
+
+    // Libera memoria del proceso terminado
+    memoryManager.freeMemory(procesoTerminado);
+
+    // Intentar reanudar procesos suspendidos
+while (!ColaSuspendidos.isEmpty()) {
+    Nodo<Proceso> nodo = ColaSuspendidos.getHead();
+    if (nodo == null) break; // por seguridad
+    Proceso p = nodo.gettInfo();
+    if (memoryManager.requestMemory(p)) {
+        ColaSuspendidos.desencolar();
+        ColaListos.encolar(p);
+        System.out.println("Proceso " + p.getNombreProceso() + " reanudado desde suspendido.");
+    } else {
+        break; // no hay memoria suficiente
+    }
+}
+}
+
 
     public void satisfacerExcepcion(Proceso proceso) {
         // Reactivar el proceso bloqueado
