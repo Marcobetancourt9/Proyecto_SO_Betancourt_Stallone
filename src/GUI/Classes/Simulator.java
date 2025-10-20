@@ -264,11 +264,11 @@ public class Simulator extends javax.swing.JFrame {
         });
         jPanel1.add(currentAlgorithmComboBOX, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, 130, -1));
 
-        primaryPanelCPU.setBackground(new java.awt.Color(56, 12, 36));
+        primaryPanelCPU.setBackground(new java.awt.Color(255, 255, 255));
         primaryPanelCPU.setLayout(new javax.swing.BoxLayout(primaryPanelCPU, javax.swing.BoxLayout.LINE_AXIS));
         jPanel1.add(primaryPanelCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 550, 170));
 
-        jPanel3.setBackground(new java.awt.Color(56, 12, 36));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setForeground(new java.awt.Color(75, 0, 130));
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
@@ -277,7 +277,7 @@ public class Simulator extends javax.swing.JFrame {
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 750, 120));
 
-        jPanel5.setBackground(new java.awt.Color(56, 12, 36));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setForeground(new java.awt.Color(75, 0, 130));
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 750, 110));
