@@ -22,6 +22,11 @@ import org.jfree.data.xy.XYSeriesCollection;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *
+ * @author marco
+ */
+
 public class ChartClass {
 
     private final App app = App.getInstance();
