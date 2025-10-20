@@ -59,7 +59,7 @@ public class Planificador {
                     proceso = fcfs();
                     break;
                 case "RR":
-                    proceso = fcfs();
+                    proceso = roundRobin();
                     break;
                 case "SPN":
                     proceso = spn();
@@ -70,6 +70,10 @@ public class Planificador {
                 case "HRRN":
                     System.out.println("Ejecutando HRRN");
                     proceso = hrrn(relojGlobal);
+                case "PRIORITY":
+                    proceso = priority();
+                    break;
+
                 // Agregar otro caso para el algoritmo que falta
             }
 
@@ -156,6 +160,8 @@ public class Planificador {
         return proceso; // Retornar el proceso
     }
 
+    
+    
     /*La diferencia es que este se ejecuta 
     cada vez que termina el quantum de tiempo*/
     private Proceso roundRobin() {
@@ -186,6 +192,24 @@ public class Planificador {
         return procesoMasCorto; // Retornar el proceso que se ha ejecutado
     }
 
+    public Proceso priority() {
+    if (ColaListos.isEmpty()) return null;
+    Nodo<Proceso> current = ColaListos.getHead();
+    Proceso mejor = null;
+    while (current != null) {
+        Proceso p = current.gettInfo();
+        if (mejor == null || p.getPriority() < mejor.getPriority()) {
+            mejor = p;
+        }
+        current = current.getpNext();
+    }
+    if (mejor != null) {
+        getColaListos().desencolar();  // usa el método eliminar(id) que ya tienes
+    }
+
+    return mejor;
+}
+    
     private Proceso srt() {
         if (getColaListos().isEmpty()) {
             return null;

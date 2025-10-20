@@ -256,7 +256,7 @@ public class Simulator extends javax.swing.JFrame {
         });
         jPanel1.add(cycleDurationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 80, 30));
 
-        currentAlgorithmComboBOX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FCFS", "SPN", "RR", "SRT", "HRRN" }));
+        currentAlgorithmComboBOX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FCFS", "SPN", "RR", "SRT", "HRRN", "PRIORITY" }));
         currentAlgorithmComboBOX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 currentAlgorithmComboBOXActionPerformed(evt);

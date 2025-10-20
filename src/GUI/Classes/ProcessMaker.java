@@ -110,7 +110,7 @@ public class ProcessMaker extends javax.swing.JFrame {
         cycleDurationLabel1.setText("(en milisegundos)");
         jPanel1.add(cycleDurationLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 130, 40));
 
-        schedulerAlgorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FCFS", "SPN", "RR", "SRT", "HRRN" }));
+        schedulerAlgorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FCFS", "SPN", "RR", "SRT", "HRRN", "PRIORITY" }));
         schedulerAlgorithmComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 schedulerAlgorithmComboBoxActionPerformed(evt);
