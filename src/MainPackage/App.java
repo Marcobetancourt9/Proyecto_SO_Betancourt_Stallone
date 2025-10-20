@@ -11,6 +11,7 @@ import GUI.Classes.Simulator;
 import GUI.Classes.ProcessMaker;
 import MainClasses.CPU;
 import MainClasses.PCB;
+import MainClasses.Metrics;
 import MainClasses.Planificador;
 import MainClasses.Proceso;
 import MainClasses.ProcesoCPUBOUND;
@@ -36,13 +37,16 @@ public class App {
     private GuardadoGson guardadoGson;
 
     public int relojGlobal;
-
+    
+    Metrics metrics = new Metrics();
+  
     private static ChartClass chartClassSystem;
     private static ChartClass chartClassCPU1;
     private static ChartClass chartClassCPU2;
     private static ChartClass chartClassCPU3;
 
     private App() {
+       
         this.planificador = inicializarSistemaOperativo();
     }
 
@@ -62,29 +66,8 @@ public class App {
 
     }
 
-    public void start() { //Este me confunde un poco porque pienso que es un hilo
-        /*
-        TESTEO DE PROCESOS -- CREACION DE PROCESOS
-         */
-//        RegistrosControlEstado environment = new RegistrosControlEstado(0, 1, 0);
-//        PCB pcb = new PCB(0, "p4", "Ready", environment);
-//
-//        RegistrosControlEstado environment2 = new RegistrosControlEstado(0, 1, 0);
-//        PCB pcb2 = new PCB(0, "p5", "Ready", environment2);
-//
-//        RegistrosControlEstado environment3 = new RegistrosControlEstado(0, 1, 0);
-//        PCB pcb3 = new PCB(0, "p6", "Ready", environment3);
-
-        //Proceso p1 = new ProcesoCPUBOUND("p1", 18, "CPU BOUND", pcb, duracionCicloInstruccion);
-//        Proceso p2 = new ProcesoCPUBOUND("p2", 6, "CPU BOUND", pcb2, duracionCicloInstruccion);
-//        Proceso p3 = new ProcesoCPUBOUND("p3", 7, "CPU BOUND", pcb3, duracionCicloInstruccion);
-//        Proceso p4 = new ProcesoIOBOUND("p4", 10, "I/O BOUND", pcb, duracionCicloInstruccion, 3, 3);
-//        Proceso p5 = new ProcesoIOBOUND("p5", 5, "I/O BOUND", pcb2, duracionCicloInstruccion, 3, 3);
-//        Proceso p6 = new ProcesoIOBOUND("p6", 15, "I/O BOUND", pcb3, duracionCicloInstruccion, 5, 3);
-        //planificador.getColaListos().encolar(p1);
-//        planificador.getColaListos().encolar(p2);
-//        planificador.getColaListos().encolar(p3);
-//        planificador.getColaListos().encolar(p4);
+    public void start() { 
+        
     }
 
     public void start2() throws FontFormatException, IOException {

@@ -36,8 +36,35 @@ public class Proceso extends Thread{
     }
 
 
-    
-    
+    private int priority = 0; // menor = mayor prioridad, por ejemplo
+    private int remainingQuantum = 0;
+  
+
+// Prioridad
+public int getPrioridad() {
+    return priority;
+}
+
+public void setPrioridad(int prioridad) {
+    this.priority = prioridad;
+}
+
+// Remaining quantum
+public int getRemainingQuantum() {
+    return remainingQuantum;
+}
+
+public void setRemainingQuantum(int remainingQuantum) {
+    this.remainingQuantum = remainingQuantum;
+}
+
+public void decrementRemainingQuantum() {
+    if (this.remainingQuantum > 0) this.remainingQuantum--;
+}
+
+public void resetRemainingQuantum(int quantum) {
+    this.remainingQuantum = quantum;
+}
 
     public int getTasaRespuesta() {
         return tasaRespuesta;
