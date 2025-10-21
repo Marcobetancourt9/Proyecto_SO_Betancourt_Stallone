@@ -189,8 +189,8 @@ public class Simulator extends javax.swing.JFrame {
 
     private void actualizarInterfaz() {
 
-        jPanel4.revalidate();
-        jPanel4.repaint();
+        ColaListos.revalidate();
+        ColaListos.repaint();
     }
 
     /**
@@ -202,35 +202,47 @@ public class Simulator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        PanelPrincipal = new javax.swing.JPanel();
+        Cola_Suspendidos = new javax.swing.JPanel();
         startSimulation = new javax.swing.JButton();
         cycleDurationSpinner = new javax.swing.JSpinner();
         currentAlgorithmComboBOX = new javax.swing.JComboBox<>();
         primaryPanelCPU = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        CLinferior = new javax.swing.JPanel();
+        ColaListos = new javax.swing.JPanel();
+        ColaBloqueados = new javax.swing.JPanel();
+        CSinferior = new javax.swing.JPanel();
+        CBinferior = new javax.swing.JPanel();
+        bloqueadoslabel = new javax.swing.JLabel();
+        CPU3label = new javax.swing.JLabel();
+        suspendidoslabel = new javax.swing.JLabel();
+        CPU1label = new javax.swing.JLabel();
+        CPU2label = new javax.swing.JLabel();
+        listoslabel = new javax.swing.JLabel();
+        fondo1 = new javax.swing.JPanel();
         cycleDurationLabel = new javax.swing.JLabel();
         Salir = new javax.swing.JButton();
         CreateProcess = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Simulador = new javax.swing.JButton();
+        Estadistica = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
+        Fondo2 = new javax.swing.JLabel();
+        Fondo3 = new javax.swing.JLabel();
+        Iniciar = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 800));
+        setPreferredSize(new java.awt.Dimension(800, 800));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Cola_Suspendidos.setBackground(new java.awt.Color(255, 255, 255));
+        Cola_Suspendidos.setForeground(new java.awt.Color(75, 0, 130));
+        Cola_Suspendidos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Cola_Suspendidos.setLayout(new javax.swing.BoxLayout(Cola_Suspendidos, javax.swing.BoxLayout.LINE_AXIS));
+        PanelPrincipal.add(Cola_Suspendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 580, 750, 120));
 
         startSimulation.setText("Start");
         startSimulation.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +250,7 @@ public class Simulator extends javax.swing.JFrame {
                 startSimulationActionPerformed(evt);
             }
         });
-        jPanel1.add(startSimulation, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, 80, 30));
+        PanelPrincipal.add(startSimulation, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, 80, 30));
 
         cycleDurationSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         cycleDurationSpinner.setToolTipText("");
@@ -254,7 +266,7 @@ public class Simulator extends javax.swing.JFrame {
                 cycleDurationSpinnerKeyPressed(evt);
             }
         });
-        jPanel1.add(cycleDurationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 80, 30));
+        PanelPrincipal.add(cycleDurationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 80, 30));
 
         currentAlgorithmComboBOX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FCFS", "SPN", "RR", "SRT", "HRRN", "PRIORITY" }));
         currentAlgorithmComboBOX.addActionListener(new java.awt.event.ActionListener() {
@@ -262,66 +274,69 @@ public class Simulator extends javax.swing.JFrame {
                 currentAlgorithmComboBOXActionPerformed(evt);
             }
         });
-        jPanel1.add(currentAlgorithmComboBOX, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, 130, -1));
+        PanelPrincipal.add(currentAlgorithmComboBOX, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, 130, -1));
 
         primaryPanelCPU.setBackground(new java.awt.Color(255, 255, 255));
         primaryPanelCPU.setLayout(new javax.swing.BoxLayout(primaryPanelCPU, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel1.add(primaryPanelCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 550, 170));
+        PanelPrincipal.add(primaryPanelCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 550, 170));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setForeground(new java.awt.Color(75, 0, 130));
-        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 750, 120));
+        CLinferior.setBackground(new java.awt.Color(255, 255, 255));
+        CLinferior.setForeground(new java.awt.Color(75, 0, 130));
+        CLinferior.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CLinferior.setLayout(new javax.swing.BoxLayout(CLinferior, javax.swing.BoxLayout.LINE_AXIS));
+        PanelPrincipal.add(CLinferior, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 750, 120));
 
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 750, 120));
+        ColaListos.setLayout(new javax.swing.BoxLayout(ColaListos, javax.swing.BoxLayout.LINE_AXIS));
+        PanelPrincipal.add(ColaListos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 750, 120));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setForeground(new java.awt.Color(75, 0, 130));
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 750, 110));
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 750, 100));
+        ColaBloqueados.setBackground(new java.awt.Color(255, 255, 255));
+        ColaBloqueados.setForeground(new java.awt.Color(75, 0, 130));
+        ColaBloqueados.setLayout(new javax.swing.BoxLayout(ColaBloqueados, javax.swing.BoxLayout.LINE_AXIS));
+        PanelPrincipal.add(ColaBloqueados, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 750, 110));
+        PanelPrincipal.add(CSinferior, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 590, 750, 100));
+        PanelPrincipal.add(CBinferior, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 750, 100));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 215, 0));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Cola Bloqueados ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 160, 30));
+        bloqueadoslabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        bloqueadoslabel.setForeground(new java.awt.Color(255, 215, 0));
+        bloqueadoslabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bloqueadoslabel.setText("Cola Bloqueados ");
+        PanelPrincipal.add(bloqueadoslabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 160, 30));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 140, 0));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("CPU-3");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 80, 40));
+        CPU3label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CPU3label.setForeground(new java.awt.Color(255, 140, 0));
+        CPU3label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CPU3label.setText("CPU-3");
+        PanelPrincipal.add(CPU3label, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 80, 40));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 140, 0));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("CPU-1");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 80, 40));
+        suspendidoslabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        suspendidoslabel.setForeground(new java.awt.Color(255, 215, 0));
+        suspendidoslabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        suspendidoslabel.setText("Cola Suspendidos");
+        PanelPrincipal.add(suspendidoslabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 540, 160, 30));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 140, 0));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("CPU-2");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 80, 40));
+        CPU1label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CPU1label.setForeground(new java.awt.Color(255, 140, 0));
+        CPU1label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CPU1label.setText("CPU-1");
+        PanelPrincipal.add(CPU1label, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 80, 40));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 215, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Cola de Listos");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 130, 20));
+        CPU2label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CPU2label.setForeground(new java.awt.Color(255, 140, 0));
+        CPU2label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CPU2label.setText("CPU-2");
+        PanelPrincipal.add(CPU2label, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 80, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Assets/solid-background-color.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 890, 580));
+        listoslabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        listoslabel.setForeground(new java.awt.Color(255, 215, 0));
+        listoslabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        listoslabel.setText("Cola de Listos");
+        PanelPrincipal.add(listoslabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 130, 20));
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cycleDurationLabel.setForeground(new java.awt.Color(255, 215, 0));
         cycleDurationLabel.setText("Ciclos de reloj:");
-        jPanel2.add(cycleDurationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 140, 30));
+        fondo1.add(cycleDurationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 140, 30));
 
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -329,7 +344,7 @@ public class Simulator extends javax.swing.JFrame {
                 SalirActionPerformed(evt);
             }
         });
-        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 110, 40));
+        fondo1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 110, 40));
 
         CreateProcess.setText("Interfaz de Creación");
         CreateProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -337,51 +352,61 @@ public class Simulator extends javax.swing.JFrame {
                 CreateProcessActionPerformed(evt);
             }
         });
-        jPanel2.add(CreateProcess, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 140, 40));
+        fondo1.add(CreateProcess, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 140, 40));
 
-        jButton4.setText("Simulador");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Simulador.setText("Simulador");
+        Simulador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                SimuladorActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 110, 40));
+        fondo1.add(Simulador, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 110, 40));
 
-        jButton5.setText("Estadistica");
-        jButton5.setMaximumSize(new java.awt.Dimension(72, 23));
-        jButton5.setMinimumSize(new java.awt.Dimension(72, 23));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Estadistica.setText("Estadistica");
+        Estadistica.setMaximumSize(new java.awt.Dimension(72, 23));
+        Estadistica.setMinimumSize(new java.awt.Dimension(72, 23));
+        Estadistica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                EstadisticaActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 110, 40));
+        fondo1.add(Estadistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 110, 40));
 
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                GuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 110, 40));
+        fondo1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 110, 40));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Assets/background2.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 640));
+        Fondo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Assets/background2.png"))); // NOI18N
+        Fondo2.setText("jLabel3");
+        fondo1.add(Fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 640));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 570));
+        PanelPrincipal.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 570));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, -1, -1));
+        Fondo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Assets/solid-background-color.png"))); // NOI18N
+        Fondo3.setText("jLabel1");
+        PanelPrincipal.add(Fondo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 720));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        Iniciar.setText("jButton1");
+        PanelPrincipal.add(Iniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, -1, -1));
+
+        getContentPane().add(PanelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setForeground(new java.awt.Color(75, 0, 130));
+        jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 750, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void createJScrollPaneOnReady(Cola<Proceso> colaListos) {
-        jPanel4.removeAll();
-        jPanel4.setLayout(new BoxLayout(jPanel4, BoxLayout.X_AXIS));
+        ColaListos.removeAll();
+        ColaListos.setLayout(new BoxLayout(ColaListos, BoxLayout.X_AXIS));
 
         Nodo<Proceso> current = colaListos.getHead();
 
@@ -399,25 +424,25 @@ public class Simulator extends javax.swing.JFrame {
             JScrollPane scrollPane = new JScrollPane(newJList);
             scrollPane.setPreferredSize(new Dimension(150, 100));
 
-            jPanel4.add(scrollPane);
-            jPanel4.add(Box.createRigidArea(new Dimension(10, 0)));
+            ColaListos.add(scrollPane);
+            ColaListos.add(Box.createRigidArea(new Dimension(10, 0)));
 
             current = current.getpNext();
         }
 
-        jPanel4.revalidate();
-        jPanel4.repaint();
+        ColaListos.revalidate();
+        ColaListos.repaint();
 
-        jPanel3.removeAll();
-        jPanel3.setLayout(new BorderLayout());
-        jPanel3.add(new JScrollPane(jPanel4), BorderLayout.CENTER);
-        jPanel3.revalidate();
-        jPanel3.repaint();
+        CLinferior.removeAll();
+        CLinferior.setLayout(new BorderLayout());
+        CLinferior.add(new JScrollPane(ColaListos), BorderLayout.CENTER);
+        CLinferior.revalidate();
+        CLinferior.repaint();
     }
 
     private void createJScrollPaneOnBlocked(Cola<Proceso> colaBloqueados) {
-        jPanel7.removeAll();
-        jPanel7.setLayout(new BoxLayout(jPanel7, BoxLayout.X_AXIS));
+        CBinferior.removeAll();
+        CBinferior.setLayout(new BoxLayout(CBinferior, BoxLayout.X_AXIS));
 
         Nodo<Proceso> current = colaBloqueados.getHead();
 
@@ -435,20 +460,20 @@ public class Simulator extends javax.swing.JFrame {
             JScrollPane scrollPane = new JScrollPane(newJList);
             scrollPane.setPreferredSize(new Dimension(150, 100));
 
-            jPanel7.add(scrollPane);
-            jPanel7.add(Box.createRigidArea(new Dimension(10, 0)));
+            CBinferior.add(scrollPane);
+            CBinferior.add(Box.createRigidArea(new Dimension(10, 0)));
 
             current = current.getpNext();
         }
 
-        jPanel7.revalidate();
-        jPanel7.repaint();
+        CBinferior.revalidate();
+        CBinferior.repaint();
 
-        jPanel5.removeAll();
-        jPanel5.setLayout(new BorderLayout());
-        jPanel5.add(new JScrollPane(jPanel7), BorderLayout.CENTER);
-        jPanel5.revalidate();
-        jPanel5.repaint();
+        ColaBloqueados.removeAll();
+        ColaBloqueados.setLayout(new BorderLayout());
+        ColaBloqueados.add(new JScrollPane(CBinferior), BorderLayout.CENTER);
+        ColaBloqueados.revalidate();
+        ColaBloqueados.repaint();
     }
 
     private DefaultListModel[] createProcessors() {
@@ -457,7 +482,7 @@ public class Simulator extends javax.swing.JFrame {
 
         // Forma interactiva de mostrar el tercer cpu
 //        auxPanelCPU.setVisible(processors != 2);
-        jLabel7.setVisible(processors != 2);
+        CPU3label.setVisible(processors != 2);
 
         DefaultListModel<String>[] modelosCPU = new DefaultListModel[processors];
         JList[] cpuLists = new JList[processors];
@@ -516,20 +541,20 @@ public class Simulator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CreateProcessActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void SimuladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimuladorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_SimuladorActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void EstadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadisticaActionPerformed
 
         Estadisticas estadistica = new Estadisticas();
         estadistica.setVisible(true);
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_EstadisticaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         app.getGuardadoGson().GuardadoGson();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_GuardarActionPerformed
 
 
     private void currentAlgorithmComboBOXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentAlgorithmComboBOXActionPerformed
@@ -564,30 +589,34 @@ public class Simulator extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CBinferior;
+    private javax.swing.JPanel CLinferior;
+    private javax.swing.JLabel CPU1label;
+    private javax.swing.JLabel CPU2label;
+    private javax.swing.JLabel CPU3label;
+    private javax.swing.JPanel CSinferior;
+    private javax.swing.JPanel ColaBloqueados;
+    private javax.swing.JPanel ColaListos;
+    private javax.swing.JPanel Cola_Suspendidos;
     private javax.swing.JButton CreateProcess;
+    private javax.swing.JButton Estadistica;
+    private javax.swing.JLabel Fondo2;
+    private javax.swing.JLabel Fondo3;
+    private javax.swing.JButton Guardar;
+    private javax.swing.JButton Iniciar;
+    private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JButton Salir;
+    private javax.swing.JButton Simulador;
+    private javax.swing.JLabel bloqueadoslabel;
     private javax.swing.JComboBox<String> currentAlgorithmComboBOX;
     private javax.swing.JLabel cycleDurationLabel;
     private javax.swing.JSpinner cycleDurationSpinner;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel fondo1;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel listoslabel;
     private javax.swing.JPanel primaryPanelCPU;
     private javax.swing.JButton startSimulation;
+    private javax.swing.JLabel suspendidoslabel;
     // End of variables declaration//GEN-END:variables
 
     /**
