@@ -4,6 +4,8 @@
  */
 package GUI.Classes;
 
+
+import MainClasses.Metrics;
 import MainPackage.App;
 import java.awt.FontFormatException;
 import java.awt.Point;
@@ -42,6 +44,13 @@ public class Estadisticas extends javax.swing.JFrame {
 
     public Estadisticas() {
         initComponents();
+        // Start periodic refresh of metrics (updates labels every 1s)
+        javax.swing.Timer _metricsTimer = new javax.swing.Timer(1000, e -> {
+            try { refreshMetrics(); } catch (Exception ex) { /* ignore */ }
+        });
+        _metricsTimer.setRepeats(true);
+        _metricsTimer.start();
+
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setSize(1100, 605);
@@ -200,4 +209,19 @@ public class Estadisticas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelChartSystem;
     private javax.swing.ButtonGroup stadisticsButtons;
     // End of variables declaration//GEN-END:variables
+private void refreshMetrics() {
+        try {
+            Metrics m = MainPackage.App.getInstance().getMetrics();
+            if (m == null) return;
+            // Update GUI labels (use available labels jLabel4..jLabel7)
+            try { jLabel4.setText(String.format("Throughput: %.2f", m.getThroughput())); } catch(Exception ex) {}
+            try { jLabel5.setText(String.format("CPU util: %.2f%%", m.getCpuUtilization()*100)); } catch(Exception ex) {}
+            try { jLabel6.setText(String.format("Avg resp time: %.2f", m.getAverageResponseTime())); } catch(Exception ex) {}
+            try { jLabel7.setText(String.format("Fairness: %.2f", m.getJainsFairness())); } catch(Exception ex) {}
+        } catch (Exception ex) {
+            // no-op if metrics methods not available yet
+        }
+    }
 }
+
+

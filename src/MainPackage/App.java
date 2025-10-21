@@ -203,4 +203,9 @@ public class App {
     public void setCpu3(CPU cpu3) {
         this.cpu3 = cpu3;
     }
+    // Expose Metrics instance to GUI
+    public Metrics getMetrics() {
+        return this.metrics;
+    }
+
 }
