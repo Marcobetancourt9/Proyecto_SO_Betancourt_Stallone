@@ -78,8 +78,8 @@ public class ProcessMaker extends javax.swing.JFrame {
         Salir = new javax.swing.JButton();
         CreateProcess = new javax.swing.JButton();
         simulatorButton = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Estadisticas = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         label2IOEXTRA = new javax.swing.JLabel();
         cycleDurationExceptionTextField = new javax.swing.JTextField();
@@ -152,23 +152,23 @@ public class ProcessMaker extends javax.swing.JFrame {
         });
         jPanel2.add(simulatorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 110, 40));
 
-        jButton5.setText("Estadistica");
-        jButton5.setMaximumSize(new java.awt.Dimension(72, 23));
-        jButton5.setMinimumSize(new java.awt.Dimension(72, 23));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Estadisticas.setText("Estadistica");
+        Estadisticas.setMaximumSize(new java.awt.Dimension(72, 23));
+        Estadisticas.setMinimumSize(new java.awt.Dimension(72, 23));
+        Estadisticas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                EstadisticasActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 110, 40));
+        jPanel2.add(Estadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 110, 40));
 
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                GuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 110, 40));
+        jPanel2.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 110, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Assets/background2.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -293,14 +293,14 @@ public class ProcessMaker extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CreateProcessActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void EstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadisticasActionPerformed
         Estadisticas estadistica = new Estadisticas();
         estadistica.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_EstadisticasActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         app.getGuardadoGson().GuardadoGson();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_GuardarActionPerformed
 
     private void cycleDurationExceptionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleDurationExceptionTextFieldActionPerformed
         // TODO add your handling code here:
@@ -535,6 +535,8 @@ public class ProcessMaker extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateProcess;
+    private javax.swing.JButton Estadisticas;
+    private javax.swing.JButton Guardar;
     private javax.swing.JButton Salir;
     private javax.swing.JLabel activeProcessorsLabel;
     private javax.swing.JLabel attributesSimulatorTitle;
@@ -545,8 +547,6 @@ public class ProcessMaker extends javax.swing.JFrame {
     private javax.swing.JTextField cycleDurationPerInstructionTextField;
     private javax.swing.JButton guardar;
     private javax.swing.JTextField instructionsQuantityTextField;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
