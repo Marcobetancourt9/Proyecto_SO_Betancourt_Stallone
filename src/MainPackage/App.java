@@ -107,32 +107,19 @@ public class App {
     }
 
     public void startSimulator(int cpuQuantity) {
-        RegistrosControlEstado environmentSO = new RegistrosControlEstado(0, 1, 0);
-        PCB pcbSO = new PCB(0, "SO", "Running", environmentSO);
-        ProcesoCPUBOUND pSO = new ProcesoCPUBOUND("SO", 3, "CPU BOUND", pcbSO, duracionCicloInstruccion);
+    // Creamos el entorno del sistema operativo
+    RegistrosControlEstado environmentSO = new RegistrosControlEstado(0, 1, 0);
+    PCB pcbSO = new PCB(0, "SO", "Running", environmentSO);
+    ProcesoCPUBOUND pSO = new ProcesoCPUBOUND("SO", 3, "CPU BOUND", pcbSO, duracionCicloInstruccion);
 
-        this.setCpu1(new CPU(0, null, "Activo", pSO));
+    // Solo una CPU activa
+    this.setCpu1(new CPU(0, null, "Activo", pSO));
+    this.cpu1.setPlanificador(planificador);
 
-        this.cpu1.setPlanificador(planificador);
+    // Arrancamos solo la CPU1
+    this.cpu1.start();
+}
 
-        this.setCpu2(new CPU(1, null, "Activo", pSO));
-
-        this.cpu2.setPlanificador(planificador);
-
-        this.setCpu3(new CPU(2, null, "Activo", pSO));
-
-        this.cpu3.setPlanificador(planificador);
-
-        if (cpuQuantity == 3) {
-            this.cpu1.start();
-            this.cpu2.start();
-            this.cpu3.start();
-        } else {
-            this.cpu1.start();
-            this.cpu2.start();
-
-        }
-    }
 
     public GuardadoGson getGuardadoGson() {
         return guardadoGson;

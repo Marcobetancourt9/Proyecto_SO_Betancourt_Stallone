@@ -7,15 +7,21 @@
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/GUI/Classes/Simulator.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainPackage/App.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/ProcesoIOBOUND.java</file>
+            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/Excepcion.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/Planificador.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/Proceso.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/ProcesoCPUBOUND.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/Metrics.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/GUI/Classes/ProcessMaker.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainPackage/Main.java</file>
+            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/GUI/Classes/ChartClass.java</file>
+            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/MemoryManager.java</file>
+            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/GUI/Classes/Estadisticas.java</file>
+            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/CPU.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/SO.java</file>
             <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/Ejemplo.java</file>
-            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/.git/config</file>
+            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/PCB.java</file>
+            <file>file:/Users/chela/NetBeansProjects/Proyecto_SO_Betancourt_Stallone/src/MainClasses/RegistrosControlEstado.java</file>
         </group>
     </open-files>
 </project-private>

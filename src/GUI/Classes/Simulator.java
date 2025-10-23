@@ -5,19 +5,13 @@
 package GUI.Classes;
 
 import AuxClass.Cola;
-import AuxClass.List;
 import AuxClass.Nodo;
 import MainClasses.CPU;
-import MainClasses.PCB;
 import MainClasses.Proceso;
-import MainClasses.ProcesoCPUBOUND;
-import MainClasses.RegistrosControlEstado;
 import MainPackage.App;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FontFormatException;
-import java.awt.Panel;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
@@ -25,95 +19,57 @@ import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 /**
- *
- * @author marco
+ * Simulador monoprocesador
+ * Eliminadas referencias a CPU2 y CPU3
+ * Conserva la lógica original con CPU1.
  */
 public class Simulator extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Simulator
-     */
     private final App app = App.getInstance();
-
     private AtomicInteger cycleDurationParameter;
-    private int processorsQuantity;
-    private DefaultListModel[] modelosCPU;
+    private DefaultListModel modeloCPU;
     private int relojGlobalSimulator;
     private boolean flagLabel;
-
     private String currentAlgorithm;
-
     private Thread simulationThread;
 
     public Simulator(AtomicInteger cycleDurationParameter, int processorsQuantity, String currentAlgorithm) {
-
         initComponents();
-
         this.setResizable(false);
         this.setSize(1100, 605);
         this.setLocationRelativeTo(null);
 
-        this.processorsQuantity = processorsQuantity;
         this.cycleDurationParameter = cycleDurationParameter;
-        // OJITOSSS
-
         this.relojGlobalSimulator = app.relojGlobal;
-
         this.flagLabel = false;
-
         this.currentAlgorithm = currentAlgorithm;
-        // CREACION DE PROCESADORES
-        this.modelosCPU = createProcessors();
 
-        // SET UP DE ALGORITMO EN APP Y EN SIMULADOR (GUI)
-        // setAlgorithm(currentAlgorithm);
+        this.modeloCPU = new DefaultListModel<>();
+
+        // setea algoritmo
         app.getPlanificador().setNombreAlgoritmo(currentAlgorithm);
 
-        // SET UP DEL VALOR DEL SPINNER EN LA SIMULACION
         updateSpinner();
-        // INICIO DE SIMULACION
         startSimulation();
-
     }
-    
-    /*
 
-    private void setAlgorithm(String currentAlgorithm) {
-        for (int i = 0; i < currentAlgorithmComboBOX.getItemCount(); i++) {
-            if (currentAlgorithmComboBOX.getItemAt(i).equals(currentAlgorithm)) {
-                currentAlgorithmComboBOX.setSelectedItem(currentAlgorithm);
-            }
-        }
-    }
-*/
     private void startSimulation() {
         simulationThread = new Thread(() -> {
             while (true) {
-
                 try {
                     SwingUtilities.invokeLater(() -> {
-
-                        if (flagLabel) {
-                            updatecycleDurationLabel();
-                        }
+                        if (flagLabel) updateCycleDurationLabel();
                         ejecutarProcesos();
-
-                        actualizarInterfaz(); // Refresca la UI
+                        actualizarInterfaz();
                         createJScrollPaneOnReady(app.getPlanificador().getColaListos());
                         createJScrollPaneOnBlocked(app.getPlanificador().getColaBloqueados());
-
-                        //app.getPlanificador().setNombreAlgoritmo(currentAlgorithmComboBOX.getModel().getSelectedItem().toString());
                     });
-                    Thread.sleep(this.cycleDurationParameter.get()); // Actualiza cada x que definio el usuario
-
-                    // POSIBLE LUGAR PARA EL RELOJ GLOBAL, MODIFICAR SLEEP PARA QUE SEA LA MISMA QUE LA DURACION DEL CICLO.
+                    Thread.sleep(this.cycleDurationParameter.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     break;
@@ -124,71 +80,48 @@ public class Simulator extends javax.swing.JFrame {
     }
 
     private void ejecutarProcesos() {
-        try {
-            CPU currentCPU0 = app.getCpu1();
-            CPU currentCPU1 = app.getCpu2();
-            CPU currentCPU2 = app.getCpu3();
+    try {
+        CPU currentCPU = app.getCpu1();
+        primaryPanelCPU.removeAll();
+        primaryPanelCPU.setLayout(new BorderLayout());
 
-            for (int i = 0; i < modelosCPU.length; i++) {
-                if (currentCPU1 == null || currentCPU1.getActualProceso() == null) {
-                    modelosCPU[i].clear();
+        DefaultListModel<String> modeloCPU = new DefaultListModel<>();
+        JList<String> cpuList = new JList<>(modeloCPU);
 
-                    // Posible Ejecucion del SO
-                    modelosCPU[i].addElement("CPU " + (i + 1) + " Vacío");
-                    continue;
-                }
+        if (currentCPU == null) {
+            modeloCPU.addElement("CPU no inicializada");
+        } else if (currentCPU.getActualProceso() == null) {
+            modeloCPU.addElement("CPU libre");
+        } else {
+            Proceso procesoActual = currentCPU.getActualProceso();
+            int marValue = procesoActual.getCant_instrucciones() - procesoActual.getTiempoRestante();
+            procesoActual.getPCB_proceso().getAmbienteEjecucion().setMAR(marValue);
+            procesoActual.getPCB_proceso().getAmbienteEjecucion().setPc(marValue + 1);
 
-                if (i == 0) {
-                    Proceso procesoActual = currentCPU0.getActualProceso();
-                    //procesoActual.setCiclosDuracion(new AtomicInteger(Integer.parseInt(this.cycleDurationParameter)));
-
-                    int marValue = procesoActual.getCant_instrucciones() - procesoActual.getTiempoRestante();
-                    procesoActual.getPCB_proceso().getAmbienteEjecucion().setMAR(marValue);
-                    procesoActual.getPCB_proceso().getAmbienteEjecucion().setPc(marValue + 1);
-
-                    modelosCPU[i].clear();
-                    modelosCPU[i].addElement("Proceso: " + procesoActual.getNombreProceso());
-                    modelosCPU[i].addElement("Instrucciones Restantes: " + procesoActual.getTiempoRestante());
-                    modelosCPU[i].addElement("PC: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getPc());
-                    modelosCPU[i].addElement("MAR: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getMAR());
-
-                } else if (i == 1) {
-                    Proceso procesoActual = currentCPU1.getActualProceso();
-                    //procesoActual.setCiclosDuracion(new AtomicInteger(Integer.parseInt(this.cycleDurationParameter)));
-                    int marValue = procesoActual.getCant_instrucciones() - procesoActual.getTiempoRestante();
-                    procesoActual.getPCB_proceso().getAmbienteEjecucion().setMAR(marValue);
-                    procesoActual.getPCB_proceso().getAmbienteEjecucion().setPc(marValue + 1);
-
-                    modelosCPU[i].clear();
-                    modelosCPU[i].addElement("Proceso: " + procesoActual.getNombreProceso());
-                    modelosCPU[i].addElement("Instrucciones Restantes: " + procesoActual.getTiempoRestante());
-                    modelosCPU[i].addElement("PC: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getPc());
-                    modelosCPU[i].addElement("MAR: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getMAR());
-                } else {
-                    Proceso procesoActual = currentCPU2.getActualProceso();
-                    //procesoActual.setCiclosDuracion(new AtomicInteger(Integer.parseInt(this.cycleDurationParameter)));
-                    int marValue = procesoActual.getCant_instrucciones() - procesoActual.getTiempoRestante();
-                    procesoActual.getPCB_proceso().getAmbienteEjecucion().setMAR(marValue);
-                    procesoActual.getPCB_proceso().getAmbienteEjecucion().setPc(marValue + 1);
-
-                    modelosCPU[i].clear();
-                    modelosCPU[i].addElement("Proceso: " + procesoActual.getNombreProceso());
-                    modelosCPU[i].addElement("Instrucciones Restantes: " + procesoActual.getTiempoRestante());
-                    modelosCPU[i].addElement("PC: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getPc());
-                    modelosCPU[i].addElement("MAR: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getMAR());
-                }
-            }
-        } catch (NullPointerException e) {
-            System.err.println("Error: currentCPU1 es nulo.");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Aquí puedes manejar el error de una forma más específica si lo necesitas.
+            modeloCPU.addElement("CPU 1");
+            modeloCPU.addElement("-------------------------");
+            modeloCPU.addElement("Proceso: " + procesoActual.getNombreProceso());
+            modeloCPU.addElement("Instrucciones restantes: " + procesoActual.getTiempoRestante());
+            modeloCPU.addElement("PC: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getPc());
+            modeloCPU.addElement("MAR: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getMAR());
+            modeloCPU.addElement("PSW: " + procesoActual.getPCB_proceso().getAmbienteEjecucion().getPsw());
         }
+
+        JScrollPane scroll = new JScrollPane(cpuList);
+        scroll.setPreferredSize(new Dimension(200, 150));
+
+        primaryPanelCPU.add(scroll, BorderLayout.CENTER);
+        primaryPanelCPU.revalidate();
+        primaryPanelCPU.repaint();
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
+
 
     private void actualizarInterfaz() {
-
         ColaListos.revalidate();
         ColaListos.repaint();
     }
@@ -214,10 +147,8 @@ public class Simulator extends javax.swing.JFrame {
         CSinferior = new javax.swing.JPanel();
         CBinferior = new javax.swing.JPanel();
         bloqueadoslabel = new javax.swing.JLabel();
-        CPU3label = new javax.swing.JLabel();
         suspendidoslabel = new javax.swing.JLabel();
         CPU1label = new javax.swing.JLabel();
-        CPU2label = new javax.swing.JLabel();
         listoslabel = new javax.swing.JLabel();
         fondo1 = new javax.swing.JPanel();
         cycleDurationLabel = new javax.swing.JLabel();
@@ -233,7 +164,6 @@ public class Simulator extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 800));
-        setPreferredSize(new java.awt.Dimension(800, 800));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -302,12 +232,6 @@ public class Simulator extends javax.swing.JFrame {
         bloqueadoslabel.setText("Cola Bloqueados ");
         PanelPrincipal.add(bloqueadoslabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 160, 30));
 
-        CPU3label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        CPU3label.setForeground(new java.awt.Color(255, 140, 0));
-        CPU3label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CPU3label.setText("CPU-3");
-        PanelPrincipal.add(CPU3label, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 80, 40));
-
         suspendidoslabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         suspendidoslabel.setForeground(new java.awt.Color(255, 215, 0));
         suspendidoslabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -318,13 +242,7 @@ public class Simulator extends javax.swing.JFrame {
         CPU1label.setForeground(new java.awt.Color(255, 140, 0));
         CPU1label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CPU1label.setText("CPU-1");
-        PanelPrincipal.add(CPU1label, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 80, 40));
-
-        CPU2label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        CPU2label.setForeground(new java.awt.Color(255, 140, 0));
-        CPU2label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CPU2label.setText("CPU-2");
-        PanelPrincipal.add(CPU2label, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 80, 40));
+        PanelPrincipal.add(CPU1label, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 80, 40));
 
         listoslabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         listoslabel.setForeground(new java.awt.Color(255, 215, 0));
@@ -423,7 +341,6 @@ public class Simulator extends javax.swing.JFrame {
 
             JScrollPane scrollPane = new JScrollPane(newJList);
             scrollPane.setPreferredSize(new Dimension(150, 100));
-
             ColaListos.add(scrollPane);
             ColaListos.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -459,7 +376,6 @@ public class Simulator extends javax.swing.JFrame {
 
             JScrollPane scrollPane = new JScrollPane(newJList);
             scrollPane.setPreferredSize(new Dimension(150, 100));
-
             CBinferior.add(scrollPane);
             CBinferior.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -476,44 +392,7 @@ public class Simulator extends javax.swing.JFrame {
         ColaBloqueados.repaint();
     }
 
-    private DefaultListModel[] createProcessors() {
-        int gap = 10;
-        int processors = this.processorsQuantity;
-
-        // Forma interactiva de mostrar el tercer cpu
-//        auxPanelCPU.setVisible(processors != 2);
-        CPU3label.setVisible(processors != 2);
-
-        DefaultListModel<String>[] modelosCPU = new DefaultListModel[processors];
-        JList[] cpuLists = new JList[processors];
-        JScrollPane[] scrollPanes = new JScrollPane[processors];
-        Dimension dimensionScrollPane = new Dimension(30, 20);
-
-        for (int i = 0; i < processors; i++) {
-            modelosCPU[i] = new DefaultListModel<>();
-            cpuLists[i] = new JList(modelosCPU[i]);
-            scrollPanes[i] = new JScrollPane(cpuLists[i]);
-            scrollPanes[i].setPreferredSize(dimensionScrollPane);
-            addProcessorToPanel(scrollPanes[i], i, processors, gap);
-        }
-
-        primaryPanelCPU.repaint();
-        primaryPanelCPU.revalidate();
-
-        return modelosCPU;
-    }
-
-    private void addProcessorToPanel(JScrollPane scrollPane, int index, int totalProcessors, int gap) {
-        if (totalProcessors == 2 || index < 2) {
-            primaryPanelCPU.add(scrollPane);
-            primaryPanelCPU.add(Box.createRigidArea(new Dimension(gap, 0)));
-        } else {
-            primaryPanelCPU.add(scrollPane);
-            primaryPanelCPU.add(Box.createRigidArea(new Dimension(gap, 0)));
-        }
-    }
-
-    private void updatecycleDurationLabel() {
+    private void updateCycleDurationLabel() {
         this.relojGlobalSimulator++;
         String relojActualString = String.valueOf(this.relojGlobalSimulator);
         cycleDurationLabel.setText("Ciclos de reloj: " + relojActualString);
@@ -522,7 +401,6 @@ public class Simulator extends javax.swing.JFrame {
 
     private void updateSpinner() {
         this.cycleDurationSpinner.setValue((int) (this.cycleDurationParameter.get() / 1000));
-
     }
 
 
@@ -583,8 +461,29 @@ public class Simulator extends javax.swing.JFrame {
     }//GEN-LAST:event_cycleDurationSpinnerStateChanged
 
     private void startSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSimulationActionPerformed
-        app.startSimulator(this.processorsQuantity);
+       // app.startSimulator(this.processorsQuantity);
+        try {
+        app.startSimulator(1); // pide a App que cree/arranque cpu1
+
+        // Asegurarnos de que la CPU1 ya exista y tenga planificador
+        if (app.getCpu1() != null && app.getPlanificador() != null) {
+            app.getCpu1().setPlanificador(app.getPlanificador());
+        }
+
+        // Marcar para que el label del reloj se actualice
         this.flagLabel = true;
+
+        // Actualizar UI inmediatamente (no esperar al próximo ciclo)
+        SwingUtilities.invokeLater(() -> {
+            ejecutarProcesos();
+            actualizarInterfaz();
+            createJScrollPaneOnReady(app.getPlanificador().getColaListos());
+            createJScrollPaneOnBlocked(app.getPlanificador().getColaBloqueados());
+        });
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_startSimulationActionPerformed
 
 
@@ -592,8 +491,6 @@ public class Simulator extends javax.swing.JFrame {
     private javax.swing.JPanel CBinferior;
     private javax.swing.JPanel CLinferior;
     private javax.swing.JLabel CPU1label;
-    private javax.swing.JLabel CPU2label;
-    private javax.swing.JLabel CPU3label;
     private javax.swing.JPanel CSinferior;
     private javax.swing.JPanel ColaBloqueados;
     private javax.swing.JPanel ColaListos;
