@@ -51,7 +51,7 @@ public class ProcessMaker extends javax.swing.JFrame {
 
         ebGaramondFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/GUI/Assets/Font/EBGaramond-Bold.ttf")).deriveFont(Font.PLAIN, 16);
 
-        JLabel[] labelArrayParameters = {jLabel7, jLabel4, jLabel5, label1IOEXTRA, label2IOEXTRA, activeProcessorsLabel, cycleDurationLabel, schedulerAlgorithmLabel};
+        JLabel[] labelArrayParameters = {jLabel7, jLabel4, jLabel5, label1IOEXTRA, label2IOEXTRA, cycleDurationLabel, schedulerAlgorithmLabel};
 
         for (JLabel currentLabel : labelArrayParameters) {
             currentLabel.setFont(ebGaramondFont);
@@ -73,7 +73,6 @@ public class ProcessMaker extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         cycleDurationLabel1 = new javax.swing.JLabel();
         schedulerAlgorithmComboBox = new javax.swing.JComboBox<>();
-        quantityProcessorsComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         Salir = new javax.swing.JButton();
         CreateProcess = new javax.swing.JButton();
@@ -93,7 +92,6 @@ public class ProcessMaker extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         processNameTextField = new javax.swing.JTextField();
-        activeProcessorsLabel = new javax.swing.JLabel();
         schedulerAlgorithmLabel = new javax.swing.JLabel();
         cycleDurationLabel = new javax.swing.JLabel();
         cycleDurationPerInstructionTextField = new javax.swing.JTextField();
@@ -108,7 +106,7 @@ public class ProcessMaker extends javax.swing.JFrame {
         cycleDurationLabel1.setForeground(new java.awt.Color(255, 255, 255));
         cycleDurationLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cycleDurationLabel1.setText("(en milisegundos)");
-        jPanel1.add(cycleDurationLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 130, 40));
+        jPanel1.add(cycleDurationLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 360, 130, 40));
 
         schedulerAlgorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FCFS", "SPN", "RR", "SRT", "HRRN", "PRIORITY" }));
         schedulerAlgorithmComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -116,15 +114,7 @@ public class ProcessMaker extends javax.swing.JFrame {
                 schedulerAlgorithmComboBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(schedulerAlgorithmComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 470, -1, -1));
-
-        quantityProcessorsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3" }));
-        quantityProcessorsComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quantityProcessorsComboBoxActionPerformed(evt);
-            }
-        });
-        jPanel1.add(quantityProcessorsComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 390, -1, -1));
+        jPanel1.add(schedulerAlgorithmComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 420, -1, -1));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -246,27 +236,22 @@ public class ProcessMaker extends javax.swing.JFrame {
         });
         jPanel1.add(processNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 240, -1));
 
-        activeProcessorsLabel.setForeground(new java.awt.Color(255, 255, 255));
-        activeProcessorsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        activeProcessorsLabel.setText("Número de procesadores activos:");
-        jPanel1.add(activeProcessorsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 220, 40));
-
         schedulerAlgorithmLabel.setForeground(new java.awt.Color(255, 255, 255));
         schedulerAlgorithmLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         schedulerAlgorithmLabel.setText("Algoritmo de planificacion inicial:");
-        jPanel1.add(schedulerAlgorithmLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 240, 40));
+        jPanel1.add(schedulerAlgorithmLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 240, 40));
 
         cycleDurationLabel.setForeground(new java.awt.Color(255, 255, 255));
         cycleDurationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cycleDurationLabel.setText("Duración del ciclo de ejecución de una instrucción:");
-        jPanel1.add(cycleDurationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 370, 50));
+        jPanel1.add(cycleDurationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 370, 50));
 
         cycleDurationPerInstructionTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cycleDurationPerInstructionTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(cycleDurationPerInstructionTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 430, 70, -1));
+        jPanel1.add(cycleDurationPerInstructionTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, 70, -1));
 
         guardar.setText("Guardar");
         guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +259,7 @@ public class ProcessMaker extends javax.swing.JFrame {
                 guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, 120, 40));
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 120, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Assets/solid-background-color.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -454,10 +439,6 @@ public class ProcessMaker extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_schedulerAlgorithmComboBoxActionPerformed
 
-    private void quantityProcessorsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityProcessorsComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quantityProcessorsComboBoxActionPerformed
-
     private Simulator saveSimulatorParameters() {
         AtomicInteger cycleDurationParameter;
         if (cycleDurationPerInstructionTextField.getText().equals("")) {
@@ -466,7 +447,7 @@ public class ProcessMaker extends javax.swing.JFrame {
             cycleDurationParameter = new AtomicInteger(Integer.parseInt(cycleDurationPerInstructionTextField.getText()));
         }
 
-        int processorsQuantity = Integer.parseInt(quantityProcessorsComboBox.getModel().getSelectedItem().toString());
+        int processorsQuantity = Integer.parseInt("1");
         String initialAlgorithm = schedulerAlgorithmComboBox.getModel().getSelectedItem().toString();
 
         Simulator simulatorWindow = new Simulator(cycleDurationParameter, processorsQuantity, initialAlgorithm);
@@ -538,7 +519,6 @@ public class ProcessMaker extends javax.swing.JFrame {
     private javax.swing.JButton Estadisticas;
     private javax.swing.JButton Guardar;
     private javax.swing.JButton Salir;
-    private javax.swing.JLabel activeProcessorsLabel;
     private javax.swing.JLabel attributesSimulatorTitle;
     private javax.swing.JTextField cycleDurationESTextField;
     private javax.swing.JTextField cycleDurationExceptionTextField;
@@ -559,7 +539,6 @@ public class ProcessMaker extends javax.swing.JFrame {
     private javax.swing.JLabel label2IOEXTRA;
     private javax.swing.JTextField processNameTextField;
     private javax.swing.JComboBox<String> processTypeComboBox;
-    private javax.swing.JComboBox<String> quantityProcessorsComboBox;
     private javax.swing.JComboBox<String> schedulerAlgorithmComboBox;
     private javax.swing.JLabel schedulerAlgorithmLabel;
     private javax.swing.JButton simulatorButton;
