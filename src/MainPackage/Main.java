@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
 public class Main {
 
     /**
-     * @param args the command line arguments
+     * @param args the command line argument
      */
     public static void main(String[] args) throws FontFormatException, IOException {
         

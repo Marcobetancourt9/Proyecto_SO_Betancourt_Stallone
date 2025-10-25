@@ -4,6 +4,8 @@
  */
 package AuxClass;
 
+import MainClasses.Proceso;
+
 /**
  *
  * @author chela
@@ -45,6 +47,10 @@ public class Nodo <T>{
      */
     public void setpNext(Nodo <T> pNext) {
         this.pNext = pNext;
+    }
+
+    public Nodo<Proceso> getNext() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

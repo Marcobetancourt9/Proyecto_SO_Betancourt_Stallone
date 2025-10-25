@@ -19,7 +19,9 @@ import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -68,6 +70,7 @@ public class Simulator extends javax.swing.JFrame {
                         actualizarInterfaz();
                         createJScrollPaneOnReady(app.getPlanificador().getColaListos());
                         createJScrollPaneOnBlocked(app.getPlanificador().getColaBloqueados());
+                        createJScrollPaneOnSuspend(app.getPlanificador().getColaSuspendidos());
                     });
                     Thread.sleep(this.cycleDurationParameter.get());
                 } catch (InterruptedException e) {
@@ -92,8 +95,16 @@ public class Simulator extends javax.swing.JFrame {
             modeloCPU.addElement("CPU no inicializada");
         } else if (currentCPU.getActualProceso() == null) {
             modeloCPU.addElement("CPU libre");
+            if (modeLabel != null) modeLabel.setText("Modo: CPU libre");
         } else {
             Proceso procesoActual = currentCPU.getActualProceso();
+            if (modeLabel != null) {
+                if (procesoActual.getNombreProceso() != null && procesoActual.getNombreProceso().equals("SO")) {
+                    modeLabel.setText("Modo: Sistema operativo");
+                } else {
+                    modeLabel.setText("Modo: Programa de usuario");
+                }
+            }
             int marValue = procesoActual.getCant_instrucciones() - procesoActual.getTiempoRestante();
             procesoActual.getPCB_proceso().getAmbienteEjecucion().setMAR(marValue);
             procesoActual.getPCB_proceso().getAmbienteEjecucion().setPc(marValue + 1);
@@ -237,6 +248,11 @@ public class Simulator extends javax.swing.JFrame {
         suspendidoslabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         suspendidoslabel.setText("Cola Suspendidos");
         PanelPrincipal.add(suspendidoslabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 540, 160, 30));
+
+        modeLabel = new javax.swing.JLabel();
+        modeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        modeLabel.setText("Modo: --");
+        PanelPrincipal.add(modeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 200, 30));
 
         CPU1label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         CPU1label.setForeground(new java.awt.Color(255, 140, 0));
@@ -487,10 +503,58 @@ public class Simulator extends javax.swing.JFrame {
     }//GEN-LAST:event_startSimulationActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
+    private void createJScrollPaneOnSuspend(AuxClass.Cola<MainClasses.Proceso> colaSuspendidos) {
+        Cola_Suspendidos.removeAll();
+        Cola_Suspendidos.setLayout(new BoxLayout(Cola_Suspendidos, BoxLayout.X_AXIS));
+
+        JPanel listosPanel = new JPanel();
+        listosPanel.setLayout(new BoxLayout(listosPanel, BoxLayout.Y_AXIS));
+        listosPanel.add(new JLabel("Suspendidos - Listos"));
+
+        JPanel bloqueadosPanel = new JPanel();
+        bloqueadosPanel.setLayout(new BoxLayout(bloqueadosPanel, BoxLayout.Y_AXIS));
+        bloqueadosPanel.add(new JLabel("Suspendidos - Bloqueados"));
+
+        Nodo<MainClasses.Proceso> current = colaSuspendidos.getHead();
+
+        while (current != null) {
+            DefaultListModel<Object> modelo = new DefaultListModel<>();
+            JList<Object> newJList = new JList<>(modelo);
+
+            MainClasses.Proceso process = current.gettInfo();
+            modelo.addElement("Proceso: " + process.getNombreProceso());
+            modelo.addElement("Instrucciones: " + process.getCant_instrucciones());
+            modelo.addElement("PC: " + process.getPCB_proceso().getAmbienteEjecucion().getPc());
+            modelo.addElement("MAR: " + process.getPCB_proceso().getAmbienteEjecucion().getMAR());
+            modelo.addElement("Estado: " + process.getPCB_proceso().getEstado());
+
+            JScrollPane scrollPane = new JScrollPane(newJList);
+            scrollPane.setPreferredSize(new Dimension(150, 100));
+
+            String estado = process.getPCB_proceso().getEstado();
+            if (estado != null && estado.equalsIgnoreCase("Blocked")) {
+                bloqueadosPanel.add(scrollPane);
+                bloqueadosPanel.add(Box.createRigidArea(new Dimension(10,0)));
+            } else {
+                // Default to Ready if not blocked
+                listosPanel.add(scrollPane);
+                listosPanel.add(Box.createRigidArea(new Dimension(10,0)));
+            }
+
+            current = current.getNext();
+        }
+
+        Cola_Suspendidos.add(listosPanel);
+        Cola_Suspendidos.add(Box.createRigidArea(new Dimension(20,0)));
+        Cola_Suspendidos.add(bloqueadosPanel);
+        Cola_Suspendidos.repaint();
+    }
+// Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CBinferior;
     private javax.swing.JPanel CLinferior;
     private javax.swing.JLabel CPU1label;
+    private javax.swing.JLabel modeLabel;
     private javax.swing.JPanel CSinferior;
     private javax.swing.JPanel ColaBloqueados;
     private javax.swing.JPanel ColaListos;

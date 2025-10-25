@@ -486,7 +486,6 @@ public void terminarProceso(Proceso procesoTerminado) {
     }
 
     // Libera memoria del proceso terminado
-    memoryManager.freeMemory(procesoTerminado);
 
     // Intentar reanudar procesos suspendidos
 while (!ColaSuspendidos.isEmpty()) {
@@ -538,5 +537,9 @@ while (!ColaSuspendidos.isEmpty()) {
     public Cola<Proceso> getColaTerminados() {
         return ColaTerminados;
     }
+
+    public Cola<Proceso> getColaSuspendidos() {
+        return ColaSuspendidos;
+                }
 
 }
