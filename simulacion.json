@@ -1,1 +1,1 @@
-{"parametrosGenerales":{"cicloDuracion":2000,"nombreAlgoritmo":"FCFS"},"colaListos":[]}
+{"parametrosGenerales":{"cicloDuracion":1000,"nombreAlgoritmo":"FCFS"},"colaListos":[{"nombre":"p1","cantidadInstrucciones":2,"tipo":"I/O BOUND","estado":"Ready","idPCB":0,"ciclosDuracion":1000,"cicloGenerarExcepcion":2,"cicloSatisfacerExcepcion":2,"PSW":0,"PC":1,"MAR":0}]}

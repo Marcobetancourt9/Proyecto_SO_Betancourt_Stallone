@@ -73,12 +73,11 @@ public Planificador(MemoryManager memoryManager) {
     public Proceso escogerProceso(int relojGlobal) {
         System.out.println(getColaListos().travel());
         Proceso proceso = null;
-        System.out.println("EScogiendo");
+        System.out.println("Escogiendo");
         try {
             semaphore.acquire(); // Adquirir el permiso del semáforo (wait)
             switch (nombreAlgoritmo) {
                 case "FCFS":
-                    System.out.println("jejejeje");
                     proceso = fcfs();
                     break;
                 case "RR":
