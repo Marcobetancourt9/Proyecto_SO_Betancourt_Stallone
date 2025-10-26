@@ -65,11 +65,11 @@ public class Estadisticas extends javax.swing.JFrame {
         jPanelChartCPU1.validate();
 
         jPanelChartCPU2.setLayout(new java.awt.BorderLayout());
-        jPanelChartCPU2.add(app.getChartClassCPU2().getChartClass(), java.awt.BorderLayout.CENTER);
+        jPanelChartCPU2.add(app.getChartClassCPU1().getChartClass(), java.awt.BorderLayout.CENTER);
         jPanelChartCPU2.validate();
 
         jPanelChartCPU3.setLayout(new java.awt.BorderLayout());
-        jPanelChartCPU3.add(app.getChartClassCPU3().getChartClass(), java.awt.BorderLayout.CENTER);
+        jPanelChartCPU3.add(app.getChartClassSystem().getChartClass(), java.awt.BorderLayout.CENTER);
         jPanelChartCPU3.validate();
     }
 
