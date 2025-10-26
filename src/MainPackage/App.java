@@ -64,12 +64,7 @@ public class App {
     }
 
     private Planificador inicializarSistemaOperativo() {
-
-        Cola<Proceso> colaListos = new Cola<>();
-        Cola<Proceso> colaBloqueados = new Cola<>();
-        Cola<Proceso> colaTerminados = new Cola<>();
-
-        this.planificador = new Planificador("", colaListos, colaBloqueados, colaTerminados, null);
+        this.planificador = new Planificador(memoryManager);
 
         return planificador;
 
